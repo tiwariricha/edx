@@ -1,0 +1,57 @@
+[37;40mnpm[0m [0m[32minfo[0m [0m[35mit worked if it ends with[0m ok
+[0m[37;40mnpm[0m [0m[34;40mverb[0m [0m[35mcli[0m [ '/usr/bin/node', '/usr/bin/npm', 'install', '--verbose' ]
+[0m[37;40mnpm[0m [0m[32minfo[0m [0m[35musing[0m npm@6.14.11
+[0m[37;40mnpm[0m [0m[32minfo[0m [0m[35musing[0m node@v12.21.0
+[0m[37;40mnpm[0m [0m[34;40mverb[0m [0m[35mnpm-session[0m c1613bfd7d461df6
+[0m[37;40mnpm[0m [0m[32minfo[0m [0m[35mlifecycle[0m edx@0.1.0~preinstall: edx@0.1.0
+[0m[37;40mnpm[0m [0m[32;40mtiming[0m [0m[35mstage:loadCurrentTree[0m Completed in 1719ms
+[0m[37;40mnpm[0m [0m[32;40mtiming[0m [0m[35mstage:loadIdealTree:cloneCurrentTree[0m Completed in 19ms
+[0m[37;40mnpm[0m [0m[30;43mWARN[0m [0m[35mread-shrinkwrap[0m This version of npm is compatible with lockfileVersion@1, but package-lock.json was generated for lockfileVersion@2. I'll try to do my best with it!
+[0m[37;40mnpm[0m [0m[32;40mtiming[0m [0m[35mstage:loadIdealTree:loadShrinkwrap[0m Completed in 878ms
+[0m[37;40mnpm[0m [0m[32;40mtiming[0m [0m[35mstage:loadIdealTree:loadAllDepsIntoIdealTree[0m Completed in 969ms
+[0m[37;40mnpm[0m [0m[32;40mtiming[0m [0m[35mstage:loadIdealTree[0m Completed in 2221ms
+[0m[37;40mnpm[0m [0m[32;40mtiming[0m [0m[35mstage:generateActionsToTake[0m Completed in 113ms
+[0m[37;40mnpm[0m [0m[34;40mverb[0m [0m[35mcorrectMkdir[0m /root/.npm/_locks correctMkdir not in flight; initializing
+[0m[37;40mnpm[0m [0m[34;40mverb[0m [0m[35mlock[0m using /root/.npm/_locks/staging-af258d8967b39536.lock for /edx/app/edxapp/edx-platform/node_modules/.staging
+[0m[37;40mnpm[0m [0m[32;40mhttp[0m [0m[35mfetch[0m GET 200 https://registry.npmjs.org/fsevents/-/fsevents-1.2.9.tgz 328ms
+[0m[37;40mnpm[0m [0m[32;40mtiming[0m [0m[35maction:extract[0m Completed in 362ms
+[0m[37;40mnpm[0m [0m[32;40mtiming[0m [0m[35maction:finalize[0m Completed in 46ms
+[0m[37;40mnpm[0m [0m[32;40mtiming[0m [0m[35maction:refresh-package-json[0m Completed in 65ms
+[0m[37;40mnpm[0m [0m[32;40mtiming[0m [0m[35maction:preinstall[0m Completed in 1ms
+[0m[37;40mnpm[0m [0m[32;40mtiming[0m [0m[35maction:build[0m Completed in 1ms
+[0m[37;40mnpm[0m [0m[32;40mtiming[0m [0m[35maction:install[0m Completed in 1ms
+[0m[37;40mnpm[0m [0m[32;40mtiming[0m [0m[35maction:postinstall[0m Completed in 1ms
+[0m[37;40mnpm[0m [0m[34;40mverb[0m [0m[35munlock[0m done using /root/.npm/_locks/staging-af258d8967b39536.lock for /edx/app/edxapp/edx-platform/node_modules/.staging
+[0m[37;40mnpm[0m [0m[32;40mtiming[0m [0m[35mstage:executeActions[0m Completed in 496ms
+[0m[37;40mnpm[0m [0m[32;40mtiming[0m [0m[35mstage:rollbackFailedOptional[0m Completed in 55ms
+[0m[37;40mnpm[0m [0m[32minfo[0m [0m[35mlinkStuff[0m edx@0.1.0
+[0m[37;40mnpm[0m [0m[32minfo[0m [0m[35mlifecycle[0m edx@0.1.0~install: edx@0.1.0
+[0m[37;40mnpm[0m [0m[32minfo[0m [0m[35mlifecycle[0m edx@0.1.0~postinstall: edx@0.1.0
+[0m[37;40mnpm[0m [0m[32minfo[0m [0m[35mlifecycle[0m edx@0.1.0~prepublish: edx@0.1.0
+[0m[37;40mnpm[0m [0m[32minfo[0m [0m[35mlifecycle[0m edx@0.1.0~prepare: edx@0.1.0
+[0m[37;40mnpm[0m [0m[32;40mtiming[0m [0m[35mstage:runTopLevelLifecycles[0m Completed in 4953ms
+[0m[37;40mnpm[0m [0m[34;40mverb[0m [0m[35msaving[0m []
+[0m[37;40mnpm[0m [0m[34;40mverb[0m [0m[35mshrinkwrap[0m skipping write for package.json because there were no changes.
+[0m[37;40mnpm[0m [0m[32minfo[0m [0m[35mlifecycle[0m undefined~preshrinkwrap: undefined
+[0m[37;40mnpm[0m [0m[32minfo[0m [0m[35mlifecycle[0m edx@0.1.0~shrinkwrap: edx@0.1.0
+[0m[37;40mnpm[0m [0m[32;40mtiming[0m [0m[35maudit submit[0m Completed in 1180ms
+[0m[37;40mnpm[0m [0m[32;40mhttp[0m [0m[35mfetch[0m POST 200 https://registry.npmjs.org/-/npm/v1/security/audits/quick 1223ms
+[0m[37;40mnpm[0m [0m[32;40mtiming[0m [0m[35maudit body[0m Completed in 46ms
+[0m[37;40mnpm[0m [0m[32minfo[0m [0m[35mlifecycle[0m edx@0.1.0~postshrinkwrap: edx@0.1.0
+[0m[37;40mnpm[0m [0m[30;43mWARN[0m[35m[0m bootstrap@4.3.1 requires a peer of popper.js@^1.14.7 but none is installed. You must install peer dependencies yourself.
+[0m[37;40mnpm[0m [0m[30;43mWARN[0m[35m[0m eslint-config-airbnb-base@11.3.2 requires a peer of eslint-plugin-import@^2.7.0 but none is installed. You must install peer dependencies yourself.
+[0m[37;40mnpm[0m [0m[30;43mWARN[0m[35m[0m eslint-config-airbnb-base@3.0.1 requires a peer of eslint@^2.9.0 but none is installed. You must install peer dependencies yourself.
+[0m[37;40mnpm[0m [0m[30;43mWARN[0m[35m[0m karma-selenium-webdriver-launcher@0.0.4 requires a peer of selenium-webdriver@^2.44.0 but none is installed. You must install peer dependencies yourself.
+[0m[37;40mnpm[0m [0m[30;43mWARN[0m[35m[0m edx@0.1.0 No repository field.
+[0m[37;40mnpm[0m [0m[30;43mWARN[0m[35m[0m edx@0.1.0 No license field.
+[0m[37;40mnpm[0m [0m[30;43mWARN[0m [0m[35moptional[0m SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.9 (node_modules/fsevents):
+[0m[37;40mnpm[0m [0m[30;43mWARN[0m [0m[35mnotsup[0m SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.9: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+[0m[37;40mnpm[0m [0m[34;40mverb[0m [0m[35mnotsup[0m SKIPPING OPTIONAL DEPENDENCY: Valid OS:    darwin
+[0m[37;40mnpm[0m [0m[34;40mverb[0m [0m[35mnotsup[0m SKIPPING OPTIONAL DEPENDENCY: Valid Arch:  any
+[0m[37;40mnpm[0m [0m[34;40mverb[0m [0m[35mnotsup[0m SKIPPING OPTIONAL DEPENDENCY: Actual OS:   linux
+[0m[37;40mnpm[0m [0m[34;40mverb[0m [0m[35mnotsup[0m SKIPPING OPTIONAL DEPENDENCY: Actual Arch: x64
+[0m
+[37;40mnpm[0m [0m[34;40mverb[0m [0m[35mexit[0m [ 0, true ]
+[0m[37;40mnpm[0m [0m[32;40mtiming[0m [0m[35mnpm[0m Completed in 6465ms
+[0m[37;40mnpm[0m [0m[32minfo[0m [0m[35mok[0m 
+[0m
