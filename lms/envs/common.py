@@ -3309,7 +3309,7 @@ FEATURES['ENABLE_CREDIT_ELIGIBILITY'] = ENABLE_CREDIT_ELIGIBILITY
 if FEATURES.get('ENABLE_CORS_HEADERS'):
     CORS_ALLOW_CREDENTIALS = True
     CORS_ORIGIN_WHITELIST = ()
-    CORS_ORIGIN_ALLOW_ALL = False
+    CORS_ORIGIN_ALLOW_ALL = True
     CORS_ALLOW_INSECURE = False
     CORS_ALLOW_HEADERS = corsheaders_default_headers + (
         'use-jwt-cookie',
@@ -4656,8 +4656,8 @@ COUNTRIES_FIRST = []
 
 ################# Settings for brand logos. #################
 LOGO_IMAGE_EXTRA_TEXT = ''
-LOGO_URL = None
-LOGO_URL_PNG = None
+LOGO_URL = ''
+LOGO_URL_PNG = ''
 LOGO_TRADEMARK_URL = None
 FAVICON_URL = None
-DEFAULT_EMAIL_LOGO_URL = 'https://edx-cdn.org/v3/default/logo.png'
+DEFAULT_EMAIL_LOGO_URL = "images/footer.png"

@@ -3,12 +3,21 @@ Courseware views functions
 """
 
 
+from lms.djangoapps.course_api.blocks.serializers import BlockDictSerializer, BlockSerializer
+from lms.djangoapps.course_home_api.outline.v1.serializers import CourseBlockSerializer
+from common.lib.xmodule.xmodule.capa_module import ProblemBlock
+from openedx.core.djangoapps.olx_rest_api.block_serializer import XBlockSerializer
+from cms.djangoapps.models.settings.encoder import CourseSettingsEncoder
 import json
 import logging
 from collections import OrderedDict, namedtuple
 from datetime import datetime
+import simplejson as simplejson
+
 
 import bleach
+from django.core import serializers
+from django.core.serializers import serialize
 import requests
 import six
 from django.conf import settings
@@ -136,6 +145,7 @@ from ..entrance_exams import user_can_skip_entrance_exam
 from ..module_render import get_module, get_module_by_usage_id, get_module_for_descriptor
 from ..tabs import _get_dynamic_tabs
 from ..toggles import COURSEWARE_OPTIMIZED_RENDER_XBLOCK
+from django.http import JsonResponse
 
 log = logging.getLogger("edx.courseware")
 
@@ -616,6 +626,7 @@ class CourseTabView(EdxFragmentView):
                 return super(CourseTabView, self).get(request, course=course, page_context=page_context, **kwargs)  # lint-amnesty, pylint: disable=super-with-arguments
             except Exception as exception:  # pylint: disable=broad-except
                 return CourseTabView.handle_exceptions(request, course_key, course, exception)
+        
 
     @staticmethod
     def url_to_enroll(course_key):
@@ -947,6 +958,7 @@ def course_about(request, course_id):
 
         allow_anonymous = check_public_access(course, [COURSE_VISIBILITY_PUBLIC, COURSE_VISIBILITY_PUBLIC_OUTLINE])
 
+
         context = {
             'course': course,
             'course_details': course_details,
@@ -974,8 +986,17 @@ def course_about(request, course_id):
             'sidebar_html_enabled': sidebar_html_enabled,
             'allow_anonymous': allow_anonymous,
         }
+        
+        json_object = {'course_details': course_details}
+        
+        return JsonResponse(
+                    json_object,
+                    # encoder serializes dates, old locations, and instances
+                    encoder=CourseSettingsEncoder,
+                    safe=False
+                )
 
-        return render_to_response('courseware/course_about.html', context)
+        # return render_to_response('courseware/course_about.html', context)
 
 
 @ensure_csrf_cookie
@@ -1772,6 +1793,12 @@ def render_xblock(request, usage_key_string, check_if_enrolled=True):
             **optimization_flags,
         }
         return render_to_response('courseware/courseware-chromeless.html', context)
+        
+        # return JsonResponse({'content':fragment.content})
+        
+        
+        
+        
 
 
 def get_optimization_flags_for_content(block, fragment):
@@ -1816,6 +1843,7 @@ class XBlockContentInspector:
     this class has the job of detecting certain patterns in XBlock content that
     would imply these dependencies, so we know when to include them or not.
     """
+
     def __init__(self, block, fragment):
         self.block = block
         self.fragment = fragment

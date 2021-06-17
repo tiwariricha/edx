@@ -2,7 +2,18 @@
 Dashboard view and supporting methods
 """
 
+from openedx.core.djangoapps.user_authn.cookies import _convert_to_absolute_uris
+from openedx.core.djangoapps.user_api.accounts.image_helpers import get_profile_image_urls_for_user
+from openedx.core.djangoapps.enrollments.serializers import CourseEnrollmentSerializer
+from rest_framework.response import Response
+from http.client import HTTPResponse
+from rest_framework.renderers import JSONRenderer
+from rest_framework.decorators import api_view, renderer_classes
+from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 
+from cms.djangoapps.models.settings.encoder import CourseSettingsEncoder
+from openedx.core.lib.json_utils import EdxJSONEncoder
+from common.djangoapps.util.json_request import JsonResponse
 import datetime
 import json
 import logging
@@ -479,7 +490,7 @@ def get_dashboard_course_limit():
     course_limit = getattr(settings, 'DASHBOARD_COURSE_LIMIT', None)
     return course_limit
 
-
+@api_view(['GET'])
 @login_required
 @ensure_csrf_cookie
 @add_maintenance_banner
@@ -750,9 +761,12 @@ def student_dashboard(request):  # lint-amnesty, pylint: disable=too-many-statem
 
     # Filter out any course enrollment course cards that are associated with fulfilled entitlements
     for entitlement in [e for e in course_entitlements if e.enrollment_course_run is not None]:
-        course_enrollments = [
+        course_enrollments= [
             enr for enr in course_enrollments if entitlement.enrollment_course_run.course_id != enr.course_id
         ]
+    
+    user_img=get_profile_image_urls_for_user(user) 
+    image_urls = _convert_to_absolute_uris(request, user_img)  
 
   
 #   landing_page =request.POST['https://rc360service-q6uoj7vcrq-uc.a.run.app/r1/landingpage/getLandingPageDetails']    
@@ -810,6 +824,7 @@ def student_dashboard(request):  # lint-amnesty, pylint: disable=too-many-statem
         # TODO START: clean up as part of REVEM-199 (START)
         'course_info': get_dashboard_course_info(user, course_enrollments),
         # TODO START: clean up as part of REVEM-199 (END)
+        'user_image_urls': user_img,
     }
 
     context_from_plugins = get_plugins_view_context(
@@ -843,4 +858,19 @@ def student_dashboard(request):  # lint-amnesty, pylint: disable=too-many-statem
         'resume_button_urls': resume_button_urls
     })
 
-    return render_to_response('dashboard.html', context)
+    # return render_to_response('dashboard.html', context)
+    
+    # return Response({'empty_dashboard_message': empty_dashboard_message,'logout_url': reverse('logout'),
+    #                      'course_info': get_dashboard_course_info(user, course_enrollments),
+    #                      'show_load_all_courses_link': show_load_all_courses_link(user, course_limit, course_enrollments),
+    #                      'display_dashboard_courses': (user.is_active or not hide_dashboard_courses_until_activated),
+    #                      'course_info': get_dashboard_course_info(user, course_enrollments),
+    #                      'enrollment_message': enrollment_message,
+    #                      'course_entitlements': course_entitlements,
+    #                      'user_image_urls': user_img
+                    
+    #                      })
+    
+    
+    serializer = CourseEnrollmentSerializer(course_enrollments,many=True)
+    return Response({'Enroll_courses':serializer.data,'user_image_urls': image_urls})

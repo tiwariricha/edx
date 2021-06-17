@@ -1,7 +1,13 @@
 """
 Views for the course home page.
 """
-
+from django.http import HttpResponse
+from lms.djangoapps.course_home_api.course_metadata.v1.serializers import CourseHomeMetadataSerializer
+from lms.djangoapps.course_home_api.outline.v1.serializers import CourseBlockSerializer
+from lms.djangoapps.course_api.serializers import CourseKeySerializer, CourseSerializer
+from common.djangoapps.util.json_request import EDXJSONEncoder, JsonResponse
+import json
+from rest_framework.response import Response
 
 import six
 from django.conf import settings
@@ -63,19 +69,24 @@ class CourseHomeView(CourseTabView):
     @method_decorator(cache_control(no_cache=True, no_store=True, must_revalidate=True))
     @method_decorator(ensure_valid_course_key)
     @method_decorator(add_maintenance_banner)
-    def get(self, request, course_id, **kwargs):  # lint-amnesty, pylint: disable=arguments-differ
+    def get(self, request, course_id=None, **kwargs):  # lint-amnesty, pylint: disable=arguments-differ
         """
         Displays the home page for the specified course.
         """
-        return super(CourseHomeView, self).get(request, course_id, 'courseware', **kwargs)  # lint-amnesty, pylint: disable=super-with-arguments
-
-    def render_to_fragment(self, request, course=None, tab=None, **kwargs):  # lint-amnesty, pylint: disable=arguments-differ, unused-argument
-        course_id = six.text_type(course.id)
-        if course_home_mfe_outline_tab_is_active(course.id) and not request.user.is_staff:
-            microfrontend_url = get_learning_mfe_home_url(course_key=course_id, view_name="home")
-            raise Redirect(microfrontend_url)
+        
         home_fragment_view = CourseHomeFragmentView()
         return home_fragment_view.render_to_fragment(request, course_id=course_id, **kwargs)
+    
+        # return super(CourseHomeView, self).get(request, course_id, 'courseware', **kwargs) # lint-amnesty, pylint: disable=super-with-arguments
+
+    # def render_to_fragment(self, request, course=None, tab=None, **kwargs):  # lint-amnesty, pylint: disable=arguments-differ, unused-argument
+    #     course_id = six.text_type(course.id)
+    #     if course_home_mfe_outline_tab_is_active(course.id) and not request.user.is_staff:
+    #         microfrontend_url = get_learning_mfe_home_url(course_key=course_id, view_name="home")
+    #         raise Redirect(microfrontend_url)
+    #     home_fragment_view = CourseHomeFragmentView()
+    #     return home_fragment_view.render_to_fragment(request, course_id=course_id, **kwargs)
+    
 
 
 class CourseHomeFragmentView(EdxFragmentView):
@@ -151,6 +162,10 @@ class CourseHomeFragmentView(EdxFragmentView):
             outline_fragment = CourseOutlineFragmentView().render_to_fragment(
                 request, course_id=course_id, **kwargs
             )
+            # outline_fragment = get_course_outline_block_tree(
+            # request, course_id, request.user 
+            # )
+            
             if LATEST_UPDATE_FLAG.is_enabled(course_key):
                 update_message_fragment = LatestUpdateFragmentView().render_to_fragment(
                     request, course_id=course_id, **kwargs
@@ -251,5 +266,10 @@ class CourseHomeFragmentView(EdxFragmentView):
             'show_search': show_search,
             'show_proctoring_info_panel': COURSEWARE_PROCTORING_IMPROVEMENTS.is_enabled(course_key),
         }
-        html = render_to_string('course_experience/course-home-fragment.html', context)
-        return Fragment(html)
+        # html = render_to_string('course_experience/course-home-fragment.html', context)
+        # return Fragment(html)
+    
+        # return JsonResponse({'key':handouts_html})
+        
+        return JsonResponse({'outline_fragment':outline_fragment})
+       

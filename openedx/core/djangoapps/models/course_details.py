@@ -134,7 +134,7 @@ class CourseDetails(object):
                 setattr(course_details, attribute, value)
 
         return course_details
-
+        
     @classmethod
     def fetch_youtube_video_id(cls, course_key):
         """

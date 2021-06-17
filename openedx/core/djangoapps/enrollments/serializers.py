@@ -4,6 +4,7 @@ Serializers for all Course Enrollment related return objects.
 
 
 import logging
+from openedx.core.lib.courses import course_image_url
 
 from rest_framework import serializers
 
@@ -44,6 +45,7 @@ class CourseSerializer(serializers.Serializer):  # pylint: disable=abstract-meth
     course_end = serializers.DateTimeField(source="end", format=None)
     invite_only = serializers.BooleanField(source="invitation_only")
     course_modes = serializers.SerializerMethodField()
+    course_image = serializers.CharField(source="course_image_url")
 
     class Meta(object):
         # For disambiguating within the drf-yasg swagger schema

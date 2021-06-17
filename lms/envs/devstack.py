@@ -62,7 +62,7 @@ LOGGING['loggers']['tracking']['handlers'] = ['console']
 
 ################################ EMAIL ########################################
 
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_FILE_PATH = '/edx/src/ace_messages/'
 
 ############################ PYFS XBLOCKS SERVICE #############################

@@ -103,8 +103,9 @@ class CourseHomeMessageFragmentView(EdxFragmentView):
             'username': request.user.username,
         }
 
-        html = render_to_string('course_experience/course-messages-fragment.html', context)
-        return Fragment(html)
+        # html = render_to_string('course_experience/course-messages-fragment.html', context)
+        # return Fragment(html)
+        
 
 
 def _register_course_home_messages(request, course, user_access, course_start_data):  # lint-amnesty, pylint: disable=unused-argument

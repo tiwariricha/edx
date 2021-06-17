@@ -567,7 +567,7 @@ def _get_user_from_email(email):
             id__in=AccountRecovery.objects.filter(secondary_email__iexact=email, is_active=True).values_list('user')
         ).get()
 
-
+@csrf_exempt
 @require_POST
 @ratelimit(key=POST_EMAIL_KEY, rate=settings.PASSWORD_RESET_EMAIL_RATE)
 @ratelimit(key=REAL_IP_KEY, rate=settings.PASSWORD_RESET_IP_RATE)

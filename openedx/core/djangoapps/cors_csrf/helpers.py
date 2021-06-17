@@ -49,7 +49,7 @@ def is_cross_domain_request_allowed(request):
             return False
 
     domain_is_whitelisted = (
-        getattr(settings, 'CORS_ORIGIN_ALLOW_ALL', False) or
+        getattr(settings, 'CORS_ORIGIN_ALLOW_ALL', True) or
         referer_hostname in getattr(settings, 'CORS_ORIGIN_WHITELIST', [])
     )
     if not domain_is_whitelisted:

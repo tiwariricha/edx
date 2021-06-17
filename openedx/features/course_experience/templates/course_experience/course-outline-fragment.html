@@ -44,7 +44,7 @@ dates_banner_displayed = False
             section_is_auto_opened = section.get('resume_block') is True
             scored = 'scored' if section.get('scored', False) else ''
             %>
-                <li class="outline-item section ${scored}">
+                <li class="outline-item section ${scored}"> 
                     <button class="section-name accordion-trigger outline-button"
                             aria-expanded="${ 'true' if section_is_auto_opened else 'false' }"
                             aria-controls="${ section['id'] }_contents"

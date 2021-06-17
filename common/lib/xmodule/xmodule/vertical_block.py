@@ -7,8 +7,10 @@ import logging
 from copy import copy
 from datetime import datetime
 from functools import reduce
+from django.http.response import JsonResponse
 
 import pytz
+from requests.models import Response
 import six
 from lxml import etree
 from web_fragments.fragment import Fragment

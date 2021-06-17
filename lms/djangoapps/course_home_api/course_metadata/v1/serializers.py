@@ -12,7 +12,7 @@ from rest_framework import serializers
 
 class CourseTabSerializer(serializers.Serializer):
     """
-    Serializer for the Course Home Tabs
+    Serializer for the Course Home Tabs 
     """
     tab_id = serializers.CharField()
     title = serializers.SerializerMethodField()

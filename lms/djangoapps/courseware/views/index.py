@@ -5,7 +5,9 @@ View for Courseware Index
 # pylint: disable=attribute-defined-outside-init
 
 
+import json
 import logging
+from django.http.response import HttpResponse, JsonResponse
 
 import six
 from django.conf import settings
@@ -254,8 +256,10 @@ class CoursewareIndex(View):
                         ),
                     )
                 )
-
+    
         return render_to_response('courseware/courseware.html', self._create_courseware_context(request))
+        # data=self._create_courseware_context(request)
+        # return HttpResponse(json.dumps(data), mimetype='application/json')
 
     def _redirect_if_not_requested_section(self):
         """
@@ -414,7 +418,6 @@ class CoursewareIndex(View):
         Returns and creates the rendering context for the courseware.
         Also returns the table of contents for the courseware.
         """
-
         course_url_name = default_course_url_name(self.course.id)
         course_url = reverse(course_url_name, kwargs={'course_id': six.text_type(self.course.id)})
         show_search = (
@@ -490,7 +493,7 @@ class CoursewareIndex(View):
                 table_of_contents['previous_of_active_section'],
                 table_of_contents['next_of_active_section'],
             )
-            courseware_context['fragment'] = self.section.render(self.view, section_context)
+            courseware_context['fragment'] = self.section.render(self.view,section_context)
 
             if self.section.position and self.section.has_children:
                 self._add_sequence_title_to_context(courseware_context)

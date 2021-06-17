@@ -5,12 +5,12 @@ Context dictionary for templates that use the ace_common base template.
 from django.conf import settings
 from django.urls import NoReverseMatch, reverse
 
-from lms.djangoapps.branding.api import get_logo_url_for_email
+from lms.djangoapps.branding.api import _footer_logo_img, get_logo_url_for_email
 from common.djangoapps.edxmako.shortcuts import marketing_link
 from openedx.core.djangoapps.theming.helpers import get_config_value_from_site_or_settings
 
 
-def get_base_template_context(site):
+def get_base_template_context(site,is_secure=True):
     """
     Dict with entries needed for all templates that use the base template.
     """

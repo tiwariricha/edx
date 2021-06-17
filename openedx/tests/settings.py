@@ -96,6 +96,7 @@ INSTALLED_APPS = (
     'waffle',
     'edx_when',
     'rest_framework_jwt',
+    'corsheaders',
 
     # Django 1.11 demands to have imported models supported by installed apps.
     'completion',

@@ -36,6 +36,10 @@ from opaque_keys.edx.keys import CourseKey
 from pytz import UTC
 from six import text_type
 
+from openedx.core.djangoapps.content.course_overviews.models import CourseOverview
+from django.core import serializers
+from django.http import HttpResponse
+
 from common.djangoapps.track import views as track_views
 from lms.djangoapps.bulk_email.models import Optout
 from common.djangoapps.course_modes.models import CourseMode
@@ -162,7 +166,13 @@ def index(request, extra_context=None, user=AnonymousUser()):
     # Add marketable programs to the context.
     context['programs_list'] = get_programs_with_type(request.site, include_hidden=False)
 
-    return render_to_response('index.html', context)
+    allCourses=CourseOverview.objects.all()
+    jsondata = serializers.serialize('json', allCourses)
+    return HttpResponse(jsondata, content_type='application/json')
+
+    # return render_to_response('index.html', context)
+    
+    
 
 
 def compose_activation_email(root_url, user, user_registration=None, route_enabled=False, profile_name=''):

@@ -309,7 +309,7 @@ def find_file(filesystem, dirs, filename):
 
 def get_course_about_section(request, course, section_key):
     """
-    This returns the snippet of html to be rendered on the course about page,
+    This returns the snippet of html to be rendered on the course about page, 
     given the key for the section.
 
     Valid keys:

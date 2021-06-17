@@ -75,7 +75,7 @@ class JsonResponse(HttpResponse):
             kwargs["status"] = status
         super(JsonResponse, self).__init__(content, *args, **kwargs)  # lint-amnesty, pylint: disable=super-with-arguments
 
-
+ 
 class JsonResponseBadRequest(HttpResponseBadRequest):
     """
     Subclass of HttpResponseBadRequest that defaults to outputting JSON.

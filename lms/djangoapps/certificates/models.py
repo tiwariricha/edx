@@ -232,7 +232,7 @@ class EligibleAvailableCertificateManager(EligibleCertificateManager):
         ineligible certificates and any linked to nonexistent courses.
         """
         return super().get_queryset().extra(
-            tables=['course_overviews_courseoverview'],
+            tables=[''],
             where=['course_id = course_overviews_courseoverview.id']
         )
 

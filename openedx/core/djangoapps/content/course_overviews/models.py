@@ -39,6 +39,8 @@ from xmodule.modulestore.django import modulestore
 from xmodule.tabs import CourseTab
 
 
+
+
 log = logging.getLogger(__name__)
 
 
@@ -651,6 +653,7 @@ class CourseOverview(TimeStampedModel):
         # make sure the "publish" signal was emitted when the course was
         # created. For tests using CourseFactory, use emit_signals=True.
         course_overviews = CourseOverview.objects.all()
+        
 
         if orgs:
             # In rare cases, courses belonging to the same org may be accidentally assigned

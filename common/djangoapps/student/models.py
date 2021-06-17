@@ -10,7 +10,8 @@ file and check it in at the same time as your model changes. To do that,
 2. ./manage.py lms schemamigration student --auto description_of_your_change
 3. Add the migration file created in edx-platform/common/djangoapps/student/migrations/
 """
-
+import json
+from json import JSONEncoder
 
 import crum
 import hashlib
@@ -1277,6 +1278,7 @@ class CourseEnrollment(models.Model):
         # Private variable for storing course_overview to minimize calls to the database.
         # When the property .course_overview is accessed for the first time, this variable will be set.
         self._course_overview = None
+        
 
     def __str__(self):
         return (
@@ -2899,6 +2901,9 @@ class CourseEnrollmentAttribute(models.Model):
             }
             for attribute in cls.objects.filter(enrollment=enrollment)
         ]
+
+
+
 
 
 class EnrollmentRefundConfiguration(ConfigurationModel):

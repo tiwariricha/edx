@@ -1,7 +1,9 @@
 """
 Views to show a course outline.
 """
-
+from common.djangoapps.util.json_request import EDXJSONEncoder
+from django.http import JsonResponse
+from django.http import HttpResponse
 
 import datetime
 import re
@@ -100,8 +102,12 @@ class CourseOutlineFragmentView(EdxFragmentView):
             'has_ended': course.has_ended(),
         }
 
-        html = render_to_string('course_experience/course-outline-fragment.html', context)
-        return Fragment(html)
+        # html = render_to_string('course_experience/course-outline-fragment.html', context)
+        # return Fragment(html)
+    
+        return course_block_tree
+        
+        
 
     def create_xblock_id_and_name_dict(self, course_block_tree, xblock_display_names=None):
         """

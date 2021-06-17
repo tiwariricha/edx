@@ -226,7 +226,7 @@ class CourseQualityView(DeveloperErrorViewMixin, GenericAPIView):
         return cls._get_all_children(course)
 
     @classmethod
-    def _get_all_children(cls, parent):  # lint-amnesty, pylint: disable=missing-function-docstring
+    def _get_all_children(cls, parent):  # lint-amnesty, pylint: disable=missing-function-docstring 
         store = modulestore()
         children = [store.get_item(child_usage_key) for child_usage_key in cls._get_children(parent)]
         visible_children = [
