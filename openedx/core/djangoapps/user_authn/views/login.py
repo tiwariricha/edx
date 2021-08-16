@@ -416,7 +416,8 @@ def enterprise_selection_page(request, user, next_url):
     return redirect_url
 
 
-@ensure_csrf_cookie
+# @ensure_csrf_cookie
+@csrf_exempt
 @require_http_methods(['POST'])
 @ratelimit(
     key='openedx.core.djangoapps.util.ratelimit.request_post_email',
@@ -590,13 +591,14 @@ class LoginSessionView(APIView):
     # This end-point is available to anonymous users,
     # so do not require authentication.
     authentication_classes = []
-
-    @method_decorator(ensure_csrf_cookie)
+    
+    # @method_decorator(ensure_csrf_cookie)
+    @method_decorator(csrf_exempt)
     def get(self, request):
         return HttpResponse(get_login_session_form(request).to_json(), content_type="application/json")  # lint-amnesty, pylint: disable=http-response-with-content-type-json
 
     @method_decorator(require_post_params(["email", "password"]))
-    @method_decorator(csrf_protect)
+    # @method_decorator(csrf_protect)
     def post(self, request):
         """Log in a user.
 

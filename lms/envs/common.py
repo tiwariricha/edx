@@ -2029,8 +2029,8 @@ MIDDLEWARE = [
 
     # CORS and CSRF
     'corsheaders.middleware.CorsMiddleware',
-    'openedx.core.djangoapps.cors_csrf.middleware.CorsCSRFMiddleware',
-    'openedx.core.djangoapps.cors_csrf.middleware.CsrfCrossDomainCookieMiddleware',
+    # 'openedx.core.djangoapps.cors_csrf.middleware.CorsCSRFMiddleware',
+    # 'openedx.core.djangoapps.cors_csrf.middleware.CsrfCrossDomainCookieMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
 
     'splash.middleware.SplashMiddleware',

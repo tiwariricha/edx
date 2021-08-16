@@ -3,6 +3,8 @@ Courseware views functions
 """
 
 
+from django.core.serializers.json import Serializer
+from openedx.core.djangoapps.content.course_overviews.serializers import CourseOverviewBaseSerializer
 from lms.djangoapps.course_api.blocks.serializers import BlockDictSerializer, BlockSerializer
 from lms.djangoapps.course_home_api.outline.v1.serializers import CourseBlockSerializer
 from common.lib.xmodule.xmodule.capa_module import ProblemBlock
@@ -280,14 +282,18 @@ def courses(request):
     # Add marketable programs to the context.
     programs_list = get_programs_with_type(request.site, include_hidden=False)
 
-    return render_to_response(
-        "courseware/courses.html",
-        {
-            'courses': courses_list,
-            'course_discovery_meanings': course_discovery_meanings,
-            'programs_list': programs_list,
-        }
-    )
+    # return render_to_response(
+    #     "courseware/courses.html",
+    #     {
+    #         'courses': courses_list,
+    #         'course_discovery_meanings': course_discovery_meanings,
+    #         'programs_list': programs_list,
+    #     }
+    # )
+    allCourses=CourseOverview.objects.all()
+    jsondata = serializers.serialize('json', allCourses)
+    return HttpResponse(jsondata, content_type='application/json')
+
 
 
 class PerUserVideoMetadataThrottle(UserRateThrottle):
@@ -1792,9 +1798,9 @@ def render_xblock(request, usage_key_string, check_if_enrolled=True):
 
             **optimization_flags,
         }
-        return render_to_response('courseware/courseware-chromeless.html', context)
+        # return render_to_response('courseware/courseware-chromeless.html', context)
         
-        # return JsonResponse({'content':fragment.content})
+        return JsonResponse({'content':fragment.content})
         
         
         
